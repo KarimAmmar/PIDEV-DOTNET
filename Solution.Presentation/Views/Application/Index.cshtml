@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Solution.Presentation.Models.ApplicationVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Applications</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Candidate ID
+        </th>
+        <th>
+            Job Offer ID
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Status
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicationId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Candidat_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Job_Offer_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Application_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Application_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Application_Status)
+        </td>
+        
+            @if (item.Application_Status == "Accepted")
+            {
+    <td>
+        @Html.ActionLink("Delete", "Delete", new { id = item.ApplicationId })
+    </td>
+
+            }
+           @if(item.Application_Status != "Accepted")
+           { 
+    <td>
+        @Html.ActionLink("Accept", "Accept", new { id = item.ApplicationId }) |
+        @Html.ActionLink("Decline", "Delete", new { id = item.ApplicationId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ApplicationId })
+    </td>
+            }
+        
+    </tr>
+}
+
+</table>

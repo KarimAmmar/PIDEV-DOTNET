@@ -43,8 +43,8 @@ namespace Solution.Data
         {
             modelBuilder.Configurations.Add(new CandidateConfiguration());
             modelBuilder.Configurations.Add(new CompanyConfiguration());
-
-
+            modelBuilder.Configurations.Add(new QuizConfiguration());
+            modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Conventions.Add(new DateTimeConvention());
         }
     }

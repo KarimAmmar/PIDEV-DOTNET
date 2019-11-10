@@ -27,5 +27,10 @@ namespace Solution.Domain.Entities
  //       public Address Address { get; set; }
 
         public int role { get; set; }
+
+        public virtual ICollection<Interview> Interviews { get; set; }
+        public virtual ICollection<Availability> Availabilities { get; set; }
+
     }
+
 }

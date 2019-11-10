@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Solution.Presentation.Models.AvailabilityVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Representator ID
+        </th>
+        <th>
+           Date
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailabilityId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Representator_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Availability_Date_Begin)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.AvailabilityId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AvailabilityId }) |
+            @Html.ActionLink("Delete", "Delete", new {  id=item.AvailabilityId}) 
+        </td>
+    </tr>
+}
+
+</table>

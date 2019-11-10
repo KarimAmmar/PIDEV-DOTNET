@@ -1,0 +1,64 @@
+﻿@model Solution.Presentation.Models.InterviewVM
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>InterviewVM</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    
+
+<div class="form-group">
+    <span class="control-label col-md-2"> Candidate</span>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Candidat_Id, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Candidat_Id, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <span class="control-label col-md-2"> Date</span>
+
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Interview_Date, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Interview_Date, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <span class="control-label col-md-2"> Type</span>
+
+    <div class="col-md-10">
+        @Html.EnumDropDownListFor(model => model.Interview_Type, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Interview_Type, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="form-group">
+    <span class="control-label col-md-2"> Location</span>
+
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Interview_Location, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Interview_Location, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

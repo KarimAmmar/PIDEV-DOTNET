@@ -1,0 +1,58 @@
+﻿@model Solution.Domain.Entities.Interview
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Interview</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Id)
+        </dd>
+
+        <dt>
+            Candidate ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Candidat_Id)
+        </dd>
+
+        <dt>
+            Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Interview_Date)
+        </dd>
+
+        <dt>
+           Location
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Interview_Location)
+        </dd>
+
+        <dt>
+           Type
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Interview_Type)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.InterviewId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

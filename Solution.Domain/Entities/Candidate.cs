@@ -39,6 +39,7 @@ namespace Solution.Domain.Entities
         public virtual ICollection<Company> Companies { get; set; }
 
         public virtual ICollection<Candidate> Contacts { get; set; }
+        public virtual ICollection<Interview> Interviews { get; set; }
 
        /* public override bool Equals(object obj)
         {

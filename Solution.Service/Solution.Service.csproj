@@ -41,14 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationService.cs" />
+    <Compile Include="AvailabilityService.cs" />
     <Compile Include="CandidateService.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="IApplicationService.cs" />
+    <Compile Include="IAvailabilityService.cs" />
     <Compile Include="CompanyService.cs" />
     <Compile Include="EventService.cs" />
     <Compile Include="ExperienceService.cs" />
     <Compile Include="ICandidatService.cs" />
     <Compile Include="ICompanyService.cs" />
     <Compile Include="IEventService.cs" />
+    <Compile Include="IInterviewService.cs" />
+    <Compile Include="InterviewService.cs" />
     <Compile Include="IExperienceService.cs" />
     <Compile Include="IOfferService.cs" />
     <Compile Include="ISkillService.cs" />
