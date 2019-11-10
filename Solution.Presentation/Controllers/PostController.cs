@@ -20,17 +20,17 @@ namespace Solution.Presentation.Controllers
             commentService = new CommentService();
         }
         // GET: Post
-        public ActionResult Index(string search)
+        public ActionResult Index(string search, int? pageNumber)
         {
             if (search != null)
             {
                 //Index action method will return a view with a student records based on what a user specify the value in textbox  
-                return View(Service.GetMany().Where(x => x.Content.Contains(search) || x.UrlImage.Contains(search) || x.PostDate.ToString().Contains(search)).OrderByDescending(x => x.PostId));
+                return View(Service.GetMany().Where(x => x.Content.Contains(search) || x.UrlImage.Contains(search) || x.PostDate.ToString().Contains(search)).OrderByDescending(x => x.PostId).ToPagedList(pageNumber ?? 1, 3));
             }
             
             else
             {
-                return View(Service.GetMany().OrderByDescending(x => x.PostId));
+                return View(Service.GetMany().OrderByDescending(x => x.PostId).ToPagedList(pageNumber ?? 1, 3));
             }
             //return View(Service.GetMany().OrderByDescending(x => x.PostId));
         }
