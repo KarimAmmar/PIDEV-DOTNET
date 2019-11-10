@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Solution.Domain.Entities.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="margin-left:17%;">News Feed</h2>
+@using (Html.BeginForm("Index", "Post", FormMethod.Get))
+{
+    <div style="  margin-right:17%">
+        <input type="submit" name="submit" value="Search" class="fa fa-search" style="color:black;float:right;height:40px" />
+        @Html.TextBox("search", "", new { placeholder = "Search..", style = " color:black; width:20%;float:right" })
+
+        <b style="float:right;margin:5px"> Search Post: </b>
+    </div>
+}
+<p style="margin-left:17%;">
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+
+@foreach (var item in Model)
+{
+    <div style="width:66%;margin-left:17%;border: 1px solid double;border-color:black;background-color:peachpuff;padding:20px">
+        <h4 style="display:none">Post</h4>
+        <hr />
+        <dl class="dl-horizontal">
+
+            <p >
+                @{string pathh = "~/Content/Uploads/user-profile.png";}
+                <img src="@Url.Content(pathh)" width="50" height="50" />
+                <b>@Html.DisplayFor(modelItem => item.UserId)</b>
+            </p>
+            <div style="float:right;width:60%">
+                <p style="display:none">
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </p>
+
+                <p style="display:none">
+                    @Html.DisplayNameFor(model => model.Content)
+                </p>
+                <p style="width:80%" >
+                    @Html.DisplayFor(modelItem => item.Content)
+                </p>
+            </div>
+            <dt style="display:none">
+
+                @Html.DisplayNameFor(model => model.UrlImage)
+            </dt>
+
+            <div>
+                @{string path = "~/Content/Uploads/" + @item.UrlImage;}
+                <img src="@Url.Content(path)" style="width:35%" />
+
+            </div>
+
+            <dt style="display:none">
+                @Html.DisplayNameFor(Model => Model.UrlVideo)
+            </dt>
+
+            <dd style="display:none">
+                @Html.DisplayFor(modelItem => item.UrlVideo)
+            </dd>
+
+            <dt style="display:none">
+                @Html.DisplayNameFor(Model => Model.PostDate)
+            </dt>
+
+            <p style="float:right;margin-right:20px;margin-bottom:20px;margin-top:10px">
+                Added on @Html.DisplayFor(modelItem => item.PostDate)
+            </p>
+
+            <dt style="display:none">
+                @Html.DisplayNameFor(Model => Model.NbrLikes)
+            </dt>
+
+            <p style="margin-top:10px">
+                <b>@Html.DisplayFor(modelItem => item.NbrLikes) users liked this post</b>
+            </p>
+            <p>
+                @Html.ActionLink("Like", "Like", new { id = item.PostId }) |
+                @Html.ActionLink("DisLike", "DisLike", new { id = item.PostId })|
+                @Html.ActionLink("Edit", "Edit", new { id = item.PostId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PostId })
+            </p>
+
+        </dl>
+    </div>
+    
+                    }

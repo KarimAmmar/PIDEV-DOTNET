@@ -1,0 +1,109 @@
+﻿@model Solution.Domain.Entities.Post
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 style="margin-left:17%">Post</h2>
+
+<div style="width:66%;margin-left:17%;border: 1px solid double;border-color:black;background-color:peachpuff;padding:20px">
+    <h4 style="display:none">Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <p>
+            @{string pathh = "~/Content/Uploads/user-profile.png";}
+            <img src="@Url.Content(pathh)" width="50" height="50" />
+            <b>@Html.DisplayFor(Model => Model.UserId)</b>
+        </p>
+
+        <p style="display:none">
+            @Html.DisplayFor(Model => Model.UserId)
+        </p>
+
+        <p style="display:none">
+            @Html.DisplayNameFor(Model => Model.Content)
+        </p>
+            <p >
+                @Html.DisplayFor(Model => Model.Content)
+            </p>
+        <dt style="display:none">
+
+            @Html.DisplayNameFor(Model => Model.UrlImage)
+        </dt>
+
+        <div>
+            @{string path = "~/Content/Uploads/" + Model.UrlImage;}
+            <img src="@Url.Content(path)" width="900" height="900" style="margin-left:100px" />
+            
+        </div>
+
+        <dt style="display:none">
+            @Html.DisplayNameFor(Model => Model.UrlVideo)
+        </dt>
+
+        <dd style="display:none">
+            @Html.DisplayFor(Model => Model.UrlVideo)
+        </dd>
+
+        <dt style="display:none">
+            @Html.DisplayNameFor(Model => Model.PostDate)
+        </dt>
+
+        <p style="float:right;margin-right:20px;margin-bottom:20px;margin-top:10px">
+            Added on @Html.DisplayFor(Model => Model.PostDate)
+        </p>
+
+        <dt style="display:none">
+            @Html.DisplayNameFor(Model => Model.NbrLikes)
+        </dt>
+
+        <p style="margin-top:10px">
+            @Html.DisplayFor(Model => Model.NbrLikes) users liked this post
+        </p>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Like", "Like", new { id = Model.PostId }) |
+    @Html.ActionLink("DisLike", "DisLike", new { id = Model.PostId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PostId }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.PostId }) |
+    @Html.ActionLink("Back to List", "Index")|
+    @Html.ActionLink("Create New", "Create", "Comment", new { idP = Model.PostId }, null)
+</p>
+
+@if (Model.Comments != null)
+{
+<div style="width:70%;margin-left:15%">
+
+    
+    @foreach (var item in ViewBag.TotalComments)
+    {
+        <div>
+            <p style="margin-left:10%">
+                <b>Written By:</b>
+                @item.UserId
+            </p>
+            <div style="border: 1px solid #ccc;width:80%;margin-left:10%">
+                
+                @item.Content
+            </div>
+
+            <p>
+                @item.CommentDate
+            </p>
+            <p>
+                @item.NbrLikes persons liked this Comment
+            </p>
+            <td>
+
+                @Html.ActionLink("Edit Comment", "Edit", "Comment", new { id = item.CommentId, idP = Model.PostId }, null) |
+
+                @Html.ActionLink("Delete", "Delete", "Comment", new { id = item.CommentId, idP = Model.PostId }, null)
+            </td>
+        </div>
+
+    }
+
+</div>
+}

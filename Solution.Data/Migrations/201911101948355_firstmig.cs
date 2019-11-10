@@ -1,9 +1,9 @@
-namespace Solution.Data.Migrations
+﻿namespace Solution.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class fixbase : DbMigration
+    public partial class firstmig : DbMigration
     {
         public override void Up()
         {
@@ -29,7 +29,41 @@ namespace Solution.Data.Migrations
                         Availability_Date_Begin = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         Availability_Date_End = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                     })
-                .PrimaryKey(t => t.AvailabilityId);
+                .PrimaryKey(t => t.AvailabilityId)
+                .ForeignKey("dbo.Users", t => t.Representator_Id, cascadeDelete: true)
+                .Index(t => t.Representator_Id);
+            
+            CreateTable(
+                "dbo.Users",
+                c => new
+                    {
+                        UserId = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        LastName = c.String(),
+                        username = c.String(),
+                        password = c.String(),
+                        status = c.Int(nullable: false),
+                        picture = c.String(nullable: false),
+                        role = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.UserId);
+            
+            CreateTable(
+                "dbo.Interviews",
+                c => new
+                    {
+                        InterviewId = c.Int(nullable: false, identity: true),
+                        User_Id = c.Int(nullable: false),
+                        Candidat_Id = c.Int(nullable: false),
+                        Interview_Date = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        Interview_Location = c.String(),
+                        Interview_Type = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.InterviewId)
+                .ForeignKey("dbo.Candidates", t => t.Candidat_Id)
+                .ForeignKey("dbo.Users", t => t.User_Id, cascadeDelete: true)
+                .Index(t => t.User_Id)
+                .Index(t => t.Candidat_Id);
             
             CreateTable(
                 "dbo.Candidates",
@@ -53,10 +87,15 @@ namespace Solution.Data.Migrations
                 c => new
                     {
                         CertificationId = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Nbr = c.Int(nullable: false),
+                        Designation = c.String(),
+                        DateObtained = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        ExpiryDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        CredentialIdentification = c.String(),
+                        CandidateId = c.Int(),
                     })
-                .PrimaryKey(t => t.CertificationId);
+                .PrimaryKey(t => t.CertificationId)
+                .ForeignKey("dbo.Candidates", t => t.CandidateId, cascadeDelete: true)
+                .Index(t => t.CandidateId);
             
             CreateTable(
                 "dbo.Companies",
@@ -64,12 +103,13 @@ namespace Solution.Data.Migrations
                     {
                         CompanyId = c.Int(nullable: false, identity: true),
                         Company_Name = c.String(),
-                        Company_Number = c.Int(nullable: false),
+                        Company_Number = c.String(),
+                        Company_Address = c.String(),
                         Company_Email = c.String(),
                         Company_Description = c.String(),
                         Company_Website = c.String(),
                         Company_Logo = c.String(),
-                        NumberOfEmployees = c.Int(nullable: false),
+                        NumberOfEmployees = c.String(),
                     })
                 .PrimaryKey(t => t.CompanyId);
             
@@ -80,6 +120,7 @@ namespace Solution.Data.Migrations
                         EventId = c.Int(nullable: false, identity: true),
                         Event_Title = c.String(),
                         Event_Description = c.String(),
+                        Event_Address = c.String(),
                         Event_Organizer = c.String(),
                         Event_Date = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         NumberOfParticipent = c.Int(nullable: false),
@@ -99,10 +140,9 @@ namespace Solution.Data.Migrations
                         Offre_Location = c.String(),
                         Offre_Duration = c.String(),
                         Offre_Salary = c.Single(nullable: false),
-                        Offer_Contract_Type = c.String(),
-                        Offer_Level_Of_Expertise = c.String(),
+                        Offer_Contract_Type = c.Int(nullable: false),
+                        Offer_Level_Of_Expertise = c.Int(nullable: false),
                         Offer_DatePublished = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
-                        Validity = c.Boolean(nullable: false),
                         Vues = c.Int(nullable: false),
                         CompanyId = c.Int(),
                     })
@@ -119,64 +159,39 @@ namespace Solution.Data.Migrations
                         DiplomaSpeciality = c.String(),
                         ObtainingDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         DiplomaUniversity = c.String(),
+                        CandidateId = c.Int(),
                     })
-                .PrimaryKey(t => t.DiplomaId);
+                .PrimaryKey(t => t.DiplomaId)
+                .ForeignKey("dbo.Candidates", t => t.CandidateId, cascadeDelete: true)
+                .Index(t => t.CandidateId);
             
             CreateTable(
                 "dbo.Experiences",
                 c => new
                     {
                         ExperienceId = c.Int(nullable: false, identity: true),
-                        Nbr = c.Int(nullable: false),
-                        field = c.String(),
-                        CandidateId = c.Int(nullable: false),
+                        Designation = c.String(),
+                        Description = c.String(),
+                        StartDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        EndDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        CandidateId = c.Int(),
                     })
                 .PrimaryKey(t => t.ExperienceId)
                 .ForeignKey("dbo.Candidates", t => t.CandidateId, cascadeDelete: true)
                 .Index(t => t.CandidateId);
             
             CreateTable(
-                "dbo.Interviews",
+                "dbo.Skills",
                 c => new
                     {
-                        InterviewId = c.Int(nullable: false, identity: true),
-                        User_Id = c.Int(nullable: false),
-                        Candidat_Id = c.Int(nullable: false),
-                        Interview_Date = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
-                        Interview_Location = c.String(),
-                        Interview_Type = c.String(),
+                        SkillId = c.Int(nullable: false, identity: true),
+                        Designation = c.String(),
+                        rating = c.Single(nullable: false),
+                        CandidateId = c.Int(),
                     })
-                .PrimaryKey(t => t.InterviewId)
-                .ForeignKey("dbo.Users", t => t.User_Id)
-                .ForeignKey("dbo.Candidates", t => t.Candidat_Id)
-                .Index(t => t.User_Id)
-                .Index(t => t.Candidat_Id);
-            
-            CreateTable(
-                "dbo.Users",
-                c => new
-                    {
-                        UserId = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        LastName = c.String(),
-                        username = c.String(),
-                        password = c.String(),
-                        status = c.Int(nullable: false),
-                        picture = c.String(nullable: false),
-                        role = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.UserId);
-            
-            CreateTable(
-                "dbo.Languages",
-                c => new
-                    {
-                        LanguageId = c.Int(nullable: false, identity: true),
-                        languageName = c.String(),
-                        Nbr = c.Int(nullable: false),
-                        Level = c.String(),
-                    })
-                .PrimaryKey(t => t.LanguageId);
+                .PrimaryKey(t => t.SkillId)
+                .ForeignKey("dbo.Candidates", t => t.CandidateId, cascadeDelete: true)
+                .Index(t => t.CandidateId);
             
             CreateTable(
                 "dbo.Claims",
@@ -194,6 +209,35 @@ namespace Solution.Data.Migrations
                 .PrimaryKey(t => t.ClaimId)
                 .ForeignKey("dbo.Users", t => t.UserId_UserId)
                 .Index(t => t.UserId_UserId);
+            
+            CreateTable(
+                "dbo.Comments",
+                c => new
+                    {
+                        CommentId = c.Int(nullable: false, identity: true),
+                        UserId = c.Int(nullable: false),
+                        Content = c.String(),
+                        CommentDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        NbrLikes = c.Int(nullable: false),
+                        PostId = c.Int(),
+                    })
+                .PrimaryKey(t => t.CommentId)
+                .ForeignKey("dbo.Posts", t => t.PostId, cascadeDelete: true)
+                .Index(t => t.PostId);
+            
+            CreateTable(
+                "dbo.Posts",
+                c => new
+                    {
+                        PostId = c.Int(nullable: false, identity: true),
+                        UserId = c.Int(nullable: false),
+                        Content = c.String(),
+                        UrlImage = c.String(),
+                        UrlVideo = c.String(),
+                        PostDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        NbrLikes = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.PostId);
             
             CreateTable(
                 "dbo.Messages",
@@ -229,35 +273,6 @@ namespace Solution.Data.Migrations
                 .PrimaryKey(t => t.PaymentId)
                 .ForeignKey("dbo.Users", t => t.UserId_UserId)
                 .Index(t => t.UserId_UserId);
-            
-            CreateTable(
-                "dbo.Posts",
-                c => new
-                    {
-                        PostId = c.Int(nullable: false, identity: true),
-                        UserId = c.Int(nullable: false),
-                        Content = c.String(),
-                        UrlImage = c.String(),
-                        UrlVideo = c.String(),
-                        PostDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
-                        NbrLikes = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.PostId);
-            
-            CreateTable(
-                "dbo.Comments",
-                c => new
-                    {
-                        CommentId = c.Int(nullable: false, identity: true),
-                        UserId = c.Int(nullable: false),
-                        Content = c.String(),
-                        CommentDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
-                        NbrLikes = c.Int(nullable: false),
-                        PostId = c.Int(),
-                    })
-                .PrimaryKey(t => t.CommentId)
-                .ForeignKey("dbo.Posts", t => t.PostId)
-                .Index(t => t.PostId);
             
             CreateTable(
                 "dbo.Questions",
@@ -300,19 +315,6 @@ namespace Solution.Data.Migrations
                 .PrimaryKey(t => t.ReactionId);
             
             CreateTable(
-                "dbo.CertificationOfCandidate",
-                c => new
-                    {
-                        Certification = c.Int(nullable: false),
-                        Candidate = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.Certification, t.Candidate })
-                .ForeignKey("dbo.Candidates", t => t.Certification, cascadeDelete: true)
-                .ForeignKey("dbo.Certifications", t => t.Candidate, cascadeDelete: true)
-                .Index(t => t.Certification)
-                .Index(t => t.Candidate);
-            
-            CreateTable(
                 "dbo.Subscribers",
                 c => new
                     {
@@ -326,30 +328,17 @@ namespace Solution.Data.Migrations
                 .Index(t => t.Candidate);
             
             CreateTable(
-                "dbo.DiplomaOfCandidate",
+                "dbo.contact",
                 c => new
                     {
-                        Diploma = c.Int(nullable: false),
-                        Candidate = c.Int(nullable: false),
+                        CandidateId = c.Int(nullable: false),
+                        ContactId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Diploma, t.Candidate })
-                .ForeignKey("dbo.Candidates", t => t.Diploma, cascadeDelete: true)
-                .ForeignKey("dbo.Diplomata", t => t.Candidate, cascadeDelete: true)
-                .Index(t => t.Diploma)
-                .Index(t => t.Candidate);
-            
-            CreateTable(
-                "dbo.Knowledge",
-                c => new
-                    {
-                        Language = c.Int(nullable: false),
-                        Candidate = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.Language, t.Candidate })
-                .ForeignKey("dbo.Candidates", t => t.Language, cascadeDelete: true)
-                .ForeignKey("dbo.Languages", t => t.Candidate, cascadeDelete: true)
-                .Index(t => t.Language)
-                .Index(t => t.Candidate);
+                .PrimaryKey(t => new { t.CandidateId, t.ContactId })
+                .ForeignKey("dbo.Candidates", t => t.CandidateId)
+                .ForeignKey("dbo.Candidates", t => t.ContactId)
+                .Index(t => t.CandidateId)
+                .Index(t => t.ContactId);
             
             CreateTable(
                 "dbo.OffresOfCandidate",
@@ -369,60 +358,56 @@ namespace Solution.Data.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.Questions", "QuizId", "dbo.Quizs");
-            DropForeignKey("dbo.Comments", "PostId", "dbo.Posts");
             DropForeignKey("dbo.Payments", "UserId_UserId", "dbo.Users");
+            DropForeignKey("dbo.Comments", "PostId", "dbo.Posts");
             DropForeignKey("dbo.Claims", "UserId_UserId", "dbo.Users");
+            DropForeignKey("dbo.Interviews", "User_Id", "dbo.Users");
+            DropForeignKey("dbo.Skills", "CandidateId", "dbo.Candidates");
             DropForeignKey("dbo.OffresOfCandidate", "Candidate", "dbo.Offers");
             DropForeignKey("dbo.OffresOfCandidate", "Offres", "dbo.Candidates");
-            DropForeignKey("dbo.Knowledge", "Candidate", "dbo.Languages");
-            DropForeignKey("dbo.Knowledge", "Language", "dbo.Candidates");
             DropForeignKey("dbo.Interviews", "Candidat_Id", "dbo.Candidates");
-            DropForeignKey("dbo.Interviews", "User_Id", "dbo.Users");
             DropForeignKey("dbo.Experiences", "CandidateId", "dbo.Candidates");
-            DropForeignKey("dbo.DiplomaOfCandidate", "Candidate", "dbo.Diplomata");
-            DropForeignKey("dbo.DiplomaOfCandidate", "Diploma", "dbo.Candidates");
+            DropForeignKey("dbo.Diplomata", "CandidateId", "dbo.Candidates");
+            DropForeignKey("dbo.contact", "ContactId", "dbo.Candidates");
+            DropForeignKey("dbo.contact", "CandidateId", "dbo.Candidates");
             DropForeignKey("dbo.Subscribers", "Candidate", "dbo.Companies");
             DropForeignKey("dbo.Subscribers", "Company", "dbo.Candidates");
             DropForeignKey("dbo.Offers", "CompanyId", "dbo.Companies");
             DropForeignKey("dbo.Events", "CompanyId", "dbo.Companies");
-            DropForeignKey("dbo.CertificationOfCandidate", "Candidate", "dbo.Certifications");
-            DropForeignKey("dbo.CertificationOfCandidate", "Certification", "dbo.Candidates");
+            DropForeignKey("dbo.Certifications", "CandidateId", "dbo.Candidates");
+            DropForeignKey("dbo.Availabilities", "Representator_Id", "dbo.Users");
             DropIndex("dbo.OffresOfCandidate", new[] { "Candidate" });
             DropIndex("dbo.OffresOfCandidate", new[] { "Offres" });
-            DropIndex("dbo.Knowledge", new[] { "Candidate" });
-            DropIndex("dbo.Knowledge", new[] { "Language" });
-            DropIndex("dbo.DiplomaOfCandidate", new[] { "Candidate" });
-            DropIndex("dbo.DiplomaOfCandidate", new[] { "Diploma" });
+            DropIndex("dbo.contact", new[] { "ContactId" });
+            DropIndex("dbo.contact", new[] { "CandidateId" });
             DropIndex("dbo.Subscribers", new[] { "Candidate" });
             DropIndex("dbo.Subscribers", new[] { "Company" });
-            DropIndex("dbo.CertificationOfCandidate", new[] { "Candidate" });
-            DropIndex("dbo.CertificationOfCandidate", new[] { "Certification" });
             DropIndex("dbo.Questions", new[] { "QuizId" });
-            DropIndex("dbo.Comments", new[] { "PostId" });
             DropIndex("dbo.Payments", new[] { "UserId_UserId" });
+            DropIndex("dbo.Comments", new[] { "PostId" });
             DropIndex("dbo.Claims", new[] { "UserId_UserId" });
-            DropIndex("dbo.Interviews", new[] { "Candidat_Id" });
-            DropIndex("dbo.Interviews", new[] { "User_Id" });
+            DropIndex("dbo.Skills", new[] { "CandidateId" });
             DropIndex("dbo.Experiences", new[] { "CandidateId" });
+            DropIndex("dbo.Diplomata", new[] { "CandidateId" });
             DropIndex("dbo.Offers", new[] { "CompanyId" });
             DropIndex("dbo.Events", new[] { "CompanyId" });
+            DropIndex("dbo.Certifications", new[] { "CandidateId" });
+            DropIndex("dbo.Interviews", new[] { "Candidat_Id" });
+            DropIndex("dbo.Interviews", new[] { "User_Id" });
+            DropIndex("dbo.Availabilities", new[] { "Representator_Id" });
             DropTable("dbo.OffresOfCandidate");
-            DropTable("dbo.Knowledge");
-            DropTable("dbo.DiplomaOfCandidate");
+            DropTable("dbo.contact");
             DropTable("dbo.Subscribers");
-            DropTable("dbo.CertificationOfCandidate");
             DropTable("dbo.Reactions");
             DropTable("dbo.Quizs");
             DropTable("dbo.Questions");
-            DropTable("dbo.Comments");
-            DropTable("dbo.Posts");
             DropTable("dbo.Payments");
             DropTable("dbo.Notifications");
             DropTable("dbo.Messages");
+            DropTable("dbo.Posts");
+            DropTable("dbo.Comments");
             DropTable("dbo.Claims");
-            DropTable("dbo.Languages");
-            DropTable("dbo.Users");
-            DropTable("dbo.Interviews");
+            DropTable("dbo.Skills");
             DropTable("dbo.Experiences");
             DropTable("dbo.Diplomata");
             DropTable("dbo.Offers");
@@ -430,6 +415,8 @@ namespace Solution.Data.Migrations
             DropTable("dbo.Companies");
             DropTable("dbo.Certifications");
             DropTable("dbo.Candidates");
+            DropTable("dbo.Interviews");
+            DropTable("dbo.Users");
             DropTable("dbo.Availabilities");
             DropTable("dbo.Applications");
         }
