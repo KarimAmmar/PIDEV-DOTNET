@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Solution.Presentation.Models.CompanyVM>
+@{
+
+    int counter = 0;
+}
+@{
+    Layout = "~/Views/Shared/_CompanyList.cshtml";
+}
+
+@using (Html.BeginForm("Index","Company",FormMethod.Get))
+{
+
+
+
+    <h3>Companies</h3>
+
+    <!-- search -->
+    <div class="search-pro">
+        <div class="map-search">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="map-search-fields">
+                            <div>
+                                @Html.RadioButton("searchBy", "Name", true) <text>Name</text>
+                                @Html.RadioButton("searchBy", "Address", true) <text>Address</text>
+                                <br />
+                            </div>
+                            <div class="field">
+
+                                @Html.TextBox("searchString")
+                            </div>
+
+                            <div>
+                                <input class="search-button" type="submit" value="Search" id="submit" />
+                            </div>
+                        </div>
+                        <br /><br /><br />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+<p>
+    @Html.ActionLink("Create New Company", "Create")
+</p>
+@if (Model.Count() == 0) { <div> No Match Any Company</div>}
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        if (counter != 0 && counter % 3 == 0)
+        {
+            @:</div>
+            @:<div class="row">
+            }
+
+            <div class="col-sm-4">
+                @Html.Partial("_CompanyDetails", item)
+            </div>
+            counter++;
+        }
+    }

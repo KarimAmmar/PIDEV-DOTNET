@@ -1,0 +1,415 @@
+﻿@model Solution.Presentation.Models.CompanyVM
+@{string path = "~/Content/Uploads/" + @Model.Company_Logo;}
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+@{
+    Layout = "~/Views/Shared/_LayoutMayssa.cshtml";
+}
+
+<div class="col-md-12 ">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
+        <li><a data-toggle="tab" href="#jobs">Jobs</a></li>
+        <li><a data-toggle="tab" href="#events">Events</a></li>
+        <li><a data-toggle="tab" href="#contact">Contact</a></li>
+    </ul>
+</div>
+<div class="col-md-4">
+
+    <!-- Company Information -->
+    <div class="sidebar">
+        <h5 class="main-title">Company Information</h5>
+        <div class="sidebar-thumbnail"><img alt="Company Logo" src="@Url.Content(path)" /> </div>
+        <div class="sidebar-information">
+            <ul class="single-category">
+                <li class="row">
+                    <h6 class="title col-xs-6">Company Name:</h6>
+                    <span class="subtitle col-xs-6">@Model.Company_Name</span>
+                </li>
+                <li class="row">
+                    <h6 class="title col-xs-6">Company Number:</h6>
+                    <span class="subtitle col-xs-6">@Model.Company_Number</span>
+                </li>
+                <li class="row">
+                    <h6 class="title col-xs-6">Company E-mail</h6>
+                    <span class="subtitle col-xs-6">@Model.Company_Email</span>
+                </li>
+
+                <li class="row">
+                    <h6 class="title col-xs-6">Company Address</h6>
+                    <span class="subtitle col-xs-6">@Model.Company_Address</span>
+                </li>
+                <li class="row">
+                    <h6 class="title col-xs-6"> Company Website</h6>
+                    <span class="subtitle col-xs-6">@Model.Company_Website</span>
+                </li>
+                <li class="row">
+                    <h6 class="title col-xs-6"> Number Of Employees</h6>
+                    <span class="subtitle col-xs-6">@Model.NumberOfEmployees</span>
+                </li>
+                <p class="col-xs-offset-6">
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.CompanyId }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+
+
+            </ul>
+        </div>
+    </div>
+
+    <!-- Company Rating -->
+    @*<div class="sidebar">
+        <h5 class="main-title">Company Rating</h5>
+        <div class="sidebar-information">
+            <ul class="single-category com-rate">
+                <li class="row">
+                    <h6 class="title col-xs-6">Expertise:</h6>
+                    <span class="col-xs-6"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span>
+                </li>
+                <li class="row">
+                    <h6 class="title col-xs-6">Knowledge:</h6>
+                    <span class="col-xs-6"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-half-o"></i> <i class="fa fa-star-o"></i></span>
+                </li>
+                <li class="row">
+                    <h6 class="title col-xs-6">Quality::</h6>
+                    <span class="col-xs-6"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i></span>
+                </li>
+                <li class="row">
+                    <h6 class="title col-xs-6">Price:</h6>
+                    <span class="col-xs-6"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span>
+                </li>
+                <li class="row">
+                    <h6 class="title col-xs-6">Services:</h6>
+                    <span class="col-xs-6"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i></span>
+                </li>
+            </ul>
+        </div>
+    </div>*@
+
+    <!-- Company Rating -->
+    @*<div class="sidebar">
+        <h5 class="main-title">Contact</h5>
+        <div class="sidebar-information form-side">
+            <form action="#">
+                <input type="text" placeholder="Name & Surname">
+                <input type="text" placeholder="E-mail address">
+                <textarea placeholder="Your Message"></textarea>
+                <button class="btn btn-primary">Send message</button>
+            </form>
+        </div>
+    </div>*@
+</div>
+
+<!-- Tab Content -->
+<div class="col-md-8">
+    <div class="tab-content">
+
+        <!-- PROFILE -->
+        <div id="profile" class="tab-pane fade in active">
+            <div class="profile-main">
+                <h3>About the Company</h3>
+                <div class="profile-in">
+                    <p>
+                        @Model.Company_Description
+                    </p>
+                    <p>
+
+
+
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, maxime, excepturi, mollitia, voluptatibus
+                        similique aliquidautem laudantium sapiente ad enim ipsa modi labo rum accusantium deleniti neque.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea, nihil, dolores, culpa ullam vero ipsum placeat
+                        accusamus nemoitate id molestiae consectetur quae pariatur repudi andae vel ex quaerat nam iusto aliquid
+                        laborum quia adipisci aut ut imcati nisi deleniti tempore maxime sequi fugit reiciendis libero quo. Rerum
+                        assumenda.
+                    </p>
+
+                    <!-- Video -->
+                    <iframe src="https://www.youtube.com/embed/uVju5--RqtY"></iframe>
+                </div>
+            </div>
+
+            <!-- Services -->
+            @*<div class="profile-main">
+                <h3>Services</h3>
+                <div class="profile-in profile-serv">
+                    <h6>Here’s an overview of the services we provide.</h6>
+                    <div class="media">
+                        <div class="media-left">
+                            <div class="icon"> <img src="images/icon-prifile-1.png" alt=""> </div>
+                        </div>
+                        <div class="media-body">
+                            <h6>Engine diagnostics and repairs</h6>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, maxime, excepturi,
+                                mollitia, voluptatibus similique aliquidautem laudantium sapiente ad enim ipsa modi
+                                labo rum accusantium deleniti neque.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left">
+                            <div class="icon"> <img src="images/icon-prifile-2.png" alt=""> </div>
+                        </div>
+                        <div class="media-body">
+                            <h6>Engine diagnostics and repairs</h6>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, maxime, excepturi,
+                                mollitia, voluptatibus similique aliquidautem laudantium sapiente ad enim ipsa modi
+                                labo rum accusantium deleniti neque.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left">
+                            <div class="icon"> <img src="images/icon-prifile-3.png" alt=""> </div>
+                        </div>
+                        <div class="media-body">
+                            <h6>Engine diagnostics and repairs</h6>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, maxime, excepturi,
+                                mollitia, voluptatibus similique aliquidautem laudantium sapiente ad enim ipsa modi
+                                labo rum accusantium deleniti neque.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+
+
+
+
+        <!-- Jobs -->
+        <div id="jobs" class="tab-pane fade">
+            <div class="header-listing">
+                <h6>Sort by</h6>
+                <div class="custom-select-box">
+                    <select name="order" class="custom-select">
+                        <option value="0">Most popular</option>
+                        <option value="1">The latest</option>
+                        <option value="2">The best rating</option>
+                    </select>
+                </div>
+                <ul class="listing-views">
+                    <li class="active"><a href="#"><i class="fa fa-list"></i></a></li>
+                    <li><a href="#"><i class="fa fa-th"></i></a></li>
+                    <li><a href="#"><i class="fa fa-th-large"></i></a></li>
+                </ul>
+            </div>
+            <div class="listing listing-1">
+                <div class="listing-section">
+                    @if (ViewBag.data != null)
+                    {
+                        foreach (var item in ViewBag.data)
+                        {
+                            <div class="listing-ver-3">
+                                <div class="listing-heading">
+                                    <h5>@item.Offer_Title</h5>
+                                    <ul class="bookmark list-inline">
+
+                                        <li><a href="@Url.Action("Details", "Offer",new { id=item.OfferId })"><i class="fa fa-eye"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-share"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="listing-inner">
+                                    <div class="listing-content">
+                                        <h6 class="title-company">@Model.Company_Name</h6>
+
+                                        <span class="location"> <i class="fa fa-map-marker"></i> @Model.Company_Address </span> <span class="type-work full-time"> @item.Offer_Contract_Type </span> <span class="type-work full-time"> @item.Offer_Level_Of_Expertise </span>
+                                        <p> @item.Offer_description</p>
+                                        <p>Proin gravida nibh vel velit auctor aliquet aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio pellentesque habitant morbi tristique senectus et netus et malesuada. <a href="single_job.html">read more</a></p>
+                                        <h6 class="title-tags">Skills required:</h6>
+                                        <ul class="tags list-inline">
+                                            <li><a href="#">Javascript</a></li>
+                                            <li><a href="#">Wordpress</a></li>
+                                            <li><a href="#">Presta</a></li>
+                                            <li><a href="#">Sass</a></li>
+                                        </ul>
+                                        <div> <small>Published at: @item.Offer_DatePublished.Date</small></div>
+
+                                    </div>
+                                </div>
+                                <div class="listing-tabs">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-money"></i> @item.Offre_Salary</a></li>
+                                        <li><a href="#"><i class="fa fa-calendar"></i>@item.Offre_Duration</a></li>
+                                        <li><a href="#"><i class="fa fa-eye"></i> @item.Vues</a></li>
+                                        <li class="share-button">
+                                            <a href="#"><i class="fa fa-share"></i> Apply</a>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="listing-ver-3">
+                        <div class="listing-heading">
+                            <h5>Front-End Web Developer</h5>
+                            <ul class="bookmark list-inline">
+                                <li><a href="#"><i class="fa fa-bookmark"></i></a></li>
+                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                <li><a href="#"><i class="fa fa-share"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="listing-inner">
+                            <div class="listing-content">
+                                <h6 class="title-company">Mars Planet Telecommunications Inc.</h6>
+                                <span class="location"> <i class="fa fa-map-marker"></i> Manhattan, New york, USA </span> <span class="type-work full-time"> Full Time </span>
+                                <p>Proin gravida nibh vel velit auctor aliquet aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio pellentesque habitant morbi tristique senectus et netus et malesuada. <a href="single_job.html">read more</a></p>
+                                <h6 class="title-tags">Skills required:</h6>
+                                <ul class="tags list-inline">
+                                    <li><a href="#">Javascript</a></li>
+                                    <li><a href="#">Wordpress</a></li>
+                                    <li><a href="#">Presta</a></li>
+                                    <li><a href="#">Sass</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="listing-tabs">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-envelope"></i> email@mail.com</a></li>
+                                <li><a href="#"><i class="fa fa-phone"></i> 012 345 678</a></li>
+                                <li><a href="#"><i class="fa fa-globe"></i> www.webstite.com</a></li>
+                                <li class="share-button">
+                                    <a href="#"><i class="fa fa-share"></i> Share</a>
+                                    <div class="contact-share">
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Events -->
+        <div id="events" class="tab-pane fade">
+            <div class="header-listing">
+                <h6>Sort by</h6>
+                <div class="custom-select-box">
+                    <select name="order" class="custom-select">
+                        <option value="0">Most popular</option>
+                        <option value="1">The latest</option>
+                        <option value="2">The best rating</option>
+                    </select>
+                </div>
+                <ul class="listing-views">
+                    <li class="active"><a href="#"><i class="fa fa-list"></i></a></li>
+                    <li><a href="#"><i class="fa fa-th"></i></a></li>
+                    <li><a href="#"><i class="fa fa-th-large"></i></a></li>
+                </ul>
+            </div>
+            <div class="listing listing-1">
+                <div class="listing-section">
+           
+                    @if (ViewBag.events != null)
+                    {
+                        foreach (var item in ViewBag.events)
+                        {
+                            <div class="listing-ver-3">
+                                <div class="listing-heading">
+                                    <h5>@item.Event_Title</h5>
+                                    <ul class="bookmark list-inline">
+
+                                        <li><a href="@Url.Action("Details", "Event",new { id=item.EventId })"><i class="fa fa-eye"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-share"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="listing-inner">
+                                    <div class="listing-content">
+                                        <h6 class="title-company">@Model.Company_Name</h6>
+
+                                        <span class="location"> <i class="fa fa-map-marker"></i> @Model.Company_Address </span> <span class="type-work full-time"> @item.Event_Date </span> 
+                                        <p> @item.Event_Description</p>
+                                        <p>Proin gravida nibh vel velit auctor aliquet aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio pellentesque habitant morbi tristique senectus et netus et malesuada. 
+                                        
+                                      
+
+                                    </div>
+                                </div>
+                                <div class="listing-tabs">
+                                    <ul>
+                                       
+                                        <li class="share-button">
+                                            <a href="#"><i class="fa fa-share"></i> Participate</a>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    }
+                 
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <div id="contact" class="tab-pane fade">
+            <div class="profile-main">
+                <h3>Contact the Company</h3>
+                <div class="profile-in">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate quis tenetur velit! Provident eum molestias aperiam suscipit distinctio ipsum cupiditate quasi, dolor sunt, cum reprehenderit quibusdam, repellendus eaque, quas magni.</p>
+                    <form method="post">
+                        <input type="text" placeholder="Name & Surname">
+                        <input type="text" placeholder="E-mail address">
+                        <input type="text" placeholder="Phone Number">
+                        <textarea placeholder="Your Message"></textarea>
+                        <input class="btn btn-primary" type="button" value="Send" onclick="location.href='@Url.Action("SendEmail", "Company")'" />
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

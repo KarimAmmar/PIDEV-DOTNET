@@ -64,29 +64,13 @@
     <Compile Include="Infrastructures\IUnitOfWork.cs" />
     <Compile Include="Infrastructures\RepositoryBase.cs" />
     <Compile Include="Infrastructures\UnitOfWork.cs" />
-    <Compile Include="Migrations\201911082110571_mig.cs" />
-    <Compile Include="Migrations\201911082110571_mig.designer.cs">
-      <DependentUpon>201911082110571_mig.cs</DependentUpon>
+    <Compile Include="Migrations\201911101652103_migration1.cs" />
+    <Compile Include="Migrations\201911101652103_migration1.designer.cs">
+      <DependentUpon>201911101652103_migration1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201911082302121_mig2.cs" />
-    <Compile Include="Migrations\201911082302121_mig2.designer.cs">
-      <DependentUpon>201911082302121_mig2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911082312144_mig3.cs" />
-    <Compile Include="Migrations\201911082312144_mig3.designer.cs">
-      <DependentUpon>201911082312144_mig3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911082330373_mig4.cs" />
-    <Compile Include="Migrations\201911082330373_mig4.designer.cs">
-      <DependentUpon>201911082330373_mig4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911082337574_mig5.cs" />
-    <Compile Include="Migrations\201911082337574_mig5.designer.cs">
-      <DependentUpon>201911082337574_mig5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911082356266_mig6.cs" />
-    <Compile Include="Migrations\201911082356266_mig6.designer.cs">
-      <DependentUpon>201911082356266_mig6.cs</DependentUpon>
+    <Compile Include="Migrations\201911101732322_migration2.cs" />
+    <Compile Include="Migrations\201911101732322_migration2.designer.cs">
+      <DependentUpon>201911101732322_migration2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyContext.cs" />
@@ -103,23 +87,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201911082110571_mig.resx">
-      <DependentUpon>201911082110571_mig.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911101652103_migration1.resx">
+      <DependentUpon>201911101652103_migration1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911082302121_mig2.resx">
-      <DependentUpon>201911082302121_mig2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911082312144_mig3.resx">
-      <DependentUpon>201911082312144_mig3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911082330373_mig4.resx">
-      <DependentUpon>201911082330373_mig4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911082337574_mig5.resx">
-      <DependentUpon>201911082337574_mig5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911082356266_mig6.resx">
-      <DependentUpon>201911082356266_mig6.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911101732322_migration2.resx">
+      <DependentUpon>201911101732322_migration2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

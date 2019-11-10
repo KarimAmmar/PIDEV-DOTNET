@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Solution.Presentation.Models.EventVM>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Event_Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Event_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Event_Address)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Event_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfParticipent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Event_Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Event_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Event_Address)
+        </td>
+    
+        <td>
+            @Html.DisplayFor(modelItem => item.Event_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfParticipent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EventId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EventId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EventId })
+        </td>
+    </tr>
+}
+
+</table>

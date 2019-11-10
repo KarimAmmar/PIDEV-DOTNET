@@ -10,14 +10,14 @@ namespace Solution.Domain.Entities
     {
         public int CompanyId { get; set; }
         public string Company_Name { get; set; }
-        public int Company_Number { get; set; }
-        //   public Address Address { get; set; }
+        public string Company_Number { get; set; }
+        public string Company_Address { get; set; }
         public string Company_Email { get; set; }
 
         public string Company_Description { get; set; }
         public string Company_Website { get; set; }
         public string Company_Logo { get; set; }
-        public int NumberOfEmployees { get; set; }
+        public string NumberOfEmployees { get; set; }
 
 
 

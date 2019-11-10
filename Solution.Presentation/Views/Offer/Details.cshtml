@@ -1,0 +1,147 @@
+﻿@model Solution.Presentation.Models.OfferVM
+@{
+    Layout = "~/Views/Shared/_CompanyList.cshtml";
+}
+
+
+
+
+
+
+<div class="profile-company-content main-user" data-bg-color="f5f5f5">
+    <div class="container">
+        <div class="row">
+
+
+            <div class="sidebar">
+
+                <!-- SIDE BAR -->
+
+                <div class="col-md-12">
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="main-title">Details</h5>
+                       
+                                    <div class="sidebar-information">
+                                        <ul class="single-category">
+                                        
+                                                        <li class="row">
+                                                            <h6 class="title col-xs-6">Title:</h6>
+                                                            <span class="subtitle col-xs-6">  @Model.Offer_Level_Of_Expertise</span>
+                                                        </li>
+                                                        <li class="row">
+                                                            <h6 class="title col-xs-6">Title:</h6>
+                                                            <span class="subtitle col-xs-6">@Model.Offer_Title</span>
+                                                        </li>
+                                                        <li class="row">
+                                                            <h6 class="title col-xs-6">Description:</h6>
+                                                            <span class="subtitle col-xs-6">@Model.Offer_description</span>
+                                                        </li>
+                                                        <li class="row">
+                                                            <h6 class="title col-xs-6">Duration</h6>
+                                                            <span class="subtitle col-xs-6">@Model.Offre_Duration</span>
+                                                        </li>
+
+                                                        <li class="row">
+                                                            <h6 class="title col-xs-6">Salary</h6>
+                                                            <span class="subtitle col-xs-6">@Model.Offre_Salary</span>
+                                                        </li>
+                                                        <li class="row">
+                                                            <h6 class="title col-xs-6"> Posted at</h6>
+                                                            <span class="subtitle col-xs-6">@Model.Offer_DatePublished</span>
+                                                        </li>
+                                                        <li class="row">
+                                                            <h6 class="title col-xs-6"> Vues</h6>
+                                                            <span class="subtitle col-xs-6">@Model.Vues</span>
+                                                        </li>
+                                                        @using (Html.BeginForm())
+                                                        {
+                                                            @Html.AntiForgeryToken()
+
+                                                            <div class="form-actions no-color col-xs-offset-6">
+                                                                @Html.ActionLink("Back to List", "Index")
+                                                            </div>
+                                                        }
+                                                        
+     
+                                                    </ul>
+                                    </div>
+
+
+
+                    </div>
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div>
+    <h4>OfferVM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Offer_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Offer_Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Offer_description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Offer_description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Offre_Duration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Offre_Duration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Offre_Salary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Offre_Salary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Offer_DatePublished)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Offer_DatePublished)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vues)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vues)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OfferId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

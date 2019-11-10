@@ -1,0 +1,129 @@
+﻿@model IEnumerable<Solution.Presentation.Models.OfferVM>
+
+
+
+
+@{
+    Layout = "~/Views/Shared/_LayoutMayssa.cshtml";
+}
+
+
+
+@using (Html.BeginForm("Index", "Offer", FormMethod.Get))
+{
+    <!-- search -->
+    <div class="search-pro">
+        <div class="map-search">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="map-search-fields">
+                            <div class="field">
+
+                                @Html.TextBox("searchString")
+                            </div>
+                            <div>
+                                <input class="search-button" type="submit" value="Search" id="submit" />
+                            </div>
+                        </div>
+                        <br /><br /><br />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+
+
+    <div class="col-md-8 col-xs-offset-2">
+        <div class="tab-content">
+            <div id="profile" class="tab-pane fade in active">
+                <div class="profile-main">
+                    <h3>All Offers</h3>
+
+                    <div class="col-xs-offset-6">
+                        @Html.ActionLink("Create New", "Create") <br /><br />
+                    </div>
+
+                    <div class="listing listing-1">
+                        <div class="listing-section">
+                            @if (ViewBag.data != null)
+                            {
+                                foreach (var comp in ViewBag.data)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        if (item.CompanyId == comp.CompanyId)
+                                        {
+                                            <div class="listing-ver-3">
+                                                <div class="listing-heading">
+                                                    <h5>@item.Offer_Title</h5>
+                                                    <ul class="bookmark list-inline">
+                                                        @Html.ActionLink("Edit", "Edit", new { id = item.OfferId }) |
+                                                        @Html.ActionLink("Details", "Details", new { id = item.OfferId }) |
+                                                        @Html.ActionLink("Delete", "Delete", new { id = item.OfferId })
+
+                                                    </ul>
+                                                </div>
+                                                <div class="listing-inner">
+                                                    <div class="listing-content">
+                                                        <h6 class="title-company">
+                                                            <a href="@Url.Action("Details", "Company",new { id=comp.CompanyId })">
+                                                                @comp.Company_Name
+                                                            </a>
+                                                        </h6>
+                                                        <span class="location"> <i class="fa fa-map-marker"></i> @comp.Company_Address</span> <span class="type-work full-time"> @item.Offer_Contract_Type </span> <span class="type-work full-time"> @item.Offer_Level_Of_Expertise </span>
+                                                        <p> @item.Offer_description</p>
+                                                        <p>
+                                                            Proin gravida nibh vel velit auctor aliquet aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit.
+                                                            Nam nec tellus a odio tincidunt auctor a ornare odio pellentesque
+                                                            habitant morbi tristique senectus et netus et malesuada.
+                                                        </p>
+                                                        <h6 class="title-tags">Skills required:</h6>
+                                                        <ul class="tags list-inline">
+                                                            <li><a href="#">JavaScript</a></li>
+                                                            <li><a href="#">Wordpress</a></li>
+                                                            <li><a href="#">Presta</a></li>
+                                                            <li><a href="#">Sass</a></li>
+                                                        </ul>
+                                                        <div> <small>Published at: @item.Offer_DatePublished.Date</small></div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="listing-tabs">
+                                                    <ul>
+                                                        <li><a href="#"><i class="fa fa-money"></i> @item.Offre_Salary</a></li>
+                                                        <li><a href="#"><i class="fa fa-calendar"></i>@item.Offre_Duration</a></li>
+                                                        <li><a href="#"><i class="fa fa-eye"></i> @item.Vues</a></li>
+                                                        <li class="share-button">
+                                                            <a href="#"><i class="fa fa-share"></i> Apply</a>
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            }
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

@@ -16,12 +16,15 @@ namespace Solution.Domain.Entities
         public string Offre_Location { get; set; }
         public string Offre_Duration { get; set; }
         public float Offre_Salary { get; set; }
-        public string Offer_Contract_Type { get; set; }
-        public string Offer_Level_Of_Expertise { get; set; }
+        public enum ContractType { Full_Time, Part_Time, Commission, Temporary, Internship, Contract }
+        public ContractType Offer_Contract_Type { get; set; }
+        //public string Offer_Contract_Type { get; set; }
+        public enum OfferLevel { Entry_Level, Mid_Level, Senior_Level }
+        public OfferLevel Offer_Level_Of_Expertise { get; set; }
 
         public DateTime Offer_DatePublished { get; set; }
 
-        public Boolean Validity { get; set; }
+        //public Boolean Validity { get; set; }
         public int Vues { get; set; }
 
         public int? CompanyId { get; set; }
