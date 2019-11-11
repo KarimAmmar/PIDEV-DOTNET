@@ -10,7 +10,8 @@ namespace Solution.Presentation.Models
     {
         public int PostId { get; set; }
         public int UserId { get; set; }
-
+        [Required]
+        [Display(Name = "Content")]
         public string Content { get; set; }
         public string UrlImage { get; set; }
         public string UrlVideo { get; set; }

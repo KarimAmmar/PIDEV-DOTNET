@@ -12,7 +12,7 @@ namespace Solution.Presentation.Models
         public int CommentId { get; set; }
         public int UserId { get; set; }
 
-
+        [Required]
         public string Content { get; set; }
         [DataType(DataType.Date)]
 
