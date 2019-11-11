@@ -4,18 +4,18 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete Post</h2>
 
-<h3>Are you sure you want to delete this Post ?</h3>
-<div>
-    <h4>Post</h4>
+<h3 style="margin-left:30%">Are you sure you want to delete this Post ?</h3>
+<div style="width:40%;margin-left:30%">
     <hr />
     <dl class="dl-horizontal">
+        @{string path = "~/Content/Uploads/" + Model.UrlImage;}
+        <img src="@Url.Content(path)" style="width:60%;margin-left:20%" />
         <dt>
             @Html.DisplayNameFor(model => model.UserId)
         </dt>
 
-        <dd>
+        <dd style="margin-left:10%">
             @Html.DisplayFor(model => model.UserId)
         </dd>
 
@@ -23,50 +23,24 @@
             @Html.DisplayNameFor(model => model.Content)
         </dt>
 
-        <dd>
+        <dd style="margin-left:10%">
             @Html.DisplayFor(model => model.Content)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UrlImage)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UrlImage)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UrlVideo)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UrlVideo)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PostDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PostDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NbrLikes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NbrLikes)
-        </dd>
+        
 
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
+        <div class="form-actions no-color" style="margin-left:50%">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to News Feed", "Index")
         </div>
     }
 </div>

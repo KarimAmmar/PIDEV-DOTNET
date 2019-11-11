@@ -6,28 +6,32 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <h2 style="margin-left:17%;">News Feed</h2>
 @using (Html.BeginForm("Index", "Post", FormMethod.Get))
 {
+
     <div style="  margin-right:17%">
         <input type="submit" name="submit" value="Search" class="fa fa-search" style="color:black;float:right;height:40px" />
         @Html.TextBox("search", "", new { placeholder = "Search..", style = " color:black; width:20%;float:right" })
 
-        <b style="float:right;margin:5px"> Search Post: </b>
+
     </div>
 }
 <p style="margin-left:17%;">
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add post", "Create")
 </p>
 
 
 
 @foreach (var item in Model)
 {
-    <div style="width:66%;margin-left:17%;border: 1px solid double;border-color:black;background-color:peachpuff;padding:20px">
-        <h4 style="display:none">Post</h4>
-        <hr />
+    <div style="margin-bottom:20px;width:66%;margin-left:17%;background-color:white;border: 1px solid;
+  padding: 20px;padding-bottom:20px;padding-left:60px;
+  box-shadow: 5px 10px 8px #888888;">
+
         <dl class="dl-horizontal">
 
             <p>
@@ -54,7 +58,7 @@
 
             <div>
                 @{string path = "~/Content/Uploads/" + @item.UrlImage;}
-                <img src="@Url.Content(path)" style="width:35%" />
+                <img src="@Url.Content(path)" style="width:350px;height:350px" />
 
             </div>
 
@@ -70,9 +74,9 @@
                 @Html.DisplayNameFor(Model => Model.First().PostDate)
             </dt>
 
-            <p style="float:right;margin-right:20px;margin-bottom:20px;margin-top:10px">
+            <b style="float:right;margin-right:20px;margin-bottom:20px;margin-top:10px">
                 Added on @Html.DisplayFor(modelItem => item.PostDate)
-            </p>
+            </b>
 
             <dt style="display:none">
                 @Html.DisplayNameFor(Model => Model.First().NbrLikes)
@@ -81,20 +85,19 @@
             <p style="margin-top:10px">
                 <b>@Html.DisplayFor(modelItem => item.NbrLikes) users liked this post</b>
             </p>
-            <p>
-                @Html.ActionLink("Like", "Like", new { id = item.PostId }) |
-                @Html.ActionLink("DisLike", "DisLike", new { id = item.PostId })|
-                @Html.ActionLink("Edit", "Edit", new { id = item.PostId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.PostId })
-            </p>
+            <b style="margin-left:75%%">
+                
+                
+                @Html.ActionLink("See more", "Details", new { id = item.PostId })
+            </b>
 
         </dl>
     </div>
 
 }
 <div style="margin-left:45%;margin-top:20px">
-@Html.PagedListPager(Model, pageNumber => Url.Action("Index", new
-{
-pageNumber
-}))
+    @Html.PagedListPager(Model, pageNumber => Url.Action("Index", new
+    {
+    pageNumber
+    }))
 </div>

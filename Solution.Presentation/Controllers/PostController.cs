@@ -39,7 +39,7 @@ namespace Solution.Presentation.Controllers
         public ActionResult Details(int id)
         {
             Post post = Service.GetById(id);
-            IEnumerable<Comment> c = commentService.GetCommentByPost(id);
+            IEnumerable<Comment> c = commentService.GetCommentByPost(id).OrderByDescending(x => x.NbrLikes);
             ViewBag.TotalComments = c;
             //post.Comments = (ICollection<Comment>)commentService.GetCommentByPost(id);
             return View(post);
@@ -83,27 +83,32 @@ namespace Solution.Presentation.Controllers
             Post p = new Post()
             {
                 PostId = fvm.PostId,
-                UserId = fvm.UserId,
+                UserId = 2,
                 Content = fvm.Content,
-                UrlImage = file.FileName,
+                
+            
                 UrlVideo = "rien",
                 PostDate = DateTime.Today,
                 NbrLikes = 0
             };
+            if (file != null) { p.UrlImage = file.FileName; }
+            else { p.UrlImage = "default-news.png"; }
             Service.Add(p);
             Service.Commit();
             //Service.Dispose();
             //ajout d'image sous dossier
             var fileName = "";
-            if (file.ContentLength > 0)
+            if (file != null)
             {
-                fileName = Path.GetFileName(file.FileName);
-                var path = Path.
-                    Combine(Server.MapPath("~/Content/Uploads/"),
-                    fileName);
-                file.SaveAs(path);
+                if (file.ContentLength > 0)
+                {
+                    fileName = Path.GetFileName(file.FileName);
+                    var path = Path.
+                        Combine(Server.MapPath("~/Content/Uploads/"),
+                        fileName);
+                    file.SaveAs(path);
+                }
             }
-
 
             return RedirectToAction("Index");
         }
@@ -131,7 +136,8 @@ namespace Solution.Presentation.Controllers
         {
             Post p = Service.GetById(id);
             p.Content = fvm.Content;
-            p.UrlImage = file.FileName;
+            if (file != null) { p.UrlImage = file.FileName; }
+            else { p.UrlImage = p.UrlImage; }
             p.UrlVideo = "rien";
             p.PostDate = DateTime.Today;
 
@@ -139,13 +145,15 @@ namespace Solution.Presentation.Controllers
             Service.Commit();
             //Service.Dispose();
             var fileName = "";
-            if (file.ContentLength > 0)
+            if (file != null) { 
+                if (file.ContentLength > 0)
             {
                 fileName = Path.GetFileName(file.FileName);
                 var path = Path.
                     Combine(Server.MapPath("~/Content/Uploads/"),
                     fileName);
                 file.SaveAs(path);
+            }
             }
 
             return RedirectToAction("Index");

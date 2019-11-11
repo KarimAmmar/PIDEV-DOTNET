@@ -5,9 +5,8 @@
 
 <h2 style="margin-left:17%">Post</h2>
 
-<div style="width:66%;margin-left:17%;border: 1px solid double;border-color:black;background-color:peachpuff;padding:20px">
-    <h4 style="display:none">Post</h4>
-    <hr />
+<div style="width:66%;margin-left:17%;border: 1px solid double;border-color:black;background-color:white;padding:20px">
+    
     <dl class="dl-horizontal">
         <p>
             @{string pathh = "~/Content/Uploads/user-profile.png";}
@@ -22,9 +21,9 @@
         <p style="display:none">
             @Html.DisplayNameFor(Model => Model.Content)
         </p>
-            <p >
-                @Html.DisplayFor(Model => Model.Content)
-            </p>
+        <p>
+            @Html.DisplayFor(Model => Model.Content)
+        </p>
         <dt style="display:none">
 
             @Html.DisplayNameFor(Model => Model.UrlImage)
@@ -33,7 +32,7 @@
         <div>
             @{string path = "~/Content/Uploads/" + Model.UrlImage;}
             <img src="@Url.Content(path)" width="900" height="900" style="margin-left:100px" />
-            
+
         </div>
 
         <dt style="display:none">
@@ -48,30 +47,32 @@
             @Html.DisplayNameFor(Model => Model.PostDate)
         </dt>
 
-        <p style="float:right;margin-right:20px;margin-bottom:20px;margin-top:10px">
+        <b style="float:right;margin-right:20px;margin-bottom:20px;margin-top:10px">
             Added on @Html.DisplayFor(Model => Model.PostDate)
-        </p>
+        </b>
 
         <dt style="display:none">
             @Html.DisplayNameFor(Model => Model.NbrLikes)
         </dt>
 
-        <p style="margin-top:10px">
+        <b style="margin-top:10px">
             @Html.DisplayFor(Model => Model.NbrLikes) users liked this post
-        </p>
+        </b>
 
 
     </dl>
+    
 </div>
-<p>
+<b style="margin-left:55%;margin-bottom:20px">
     @Html.ActionLink("Like", "Like", new { id = Model.PostId }) |
     @Html.ActionLink("DisLike", "DisLike", new { id = Model.PostId }) |
+    @Html.ActionLink("Comment", "Create", "Comment", new { idP = Model.PostId }, null)|
     @Html.ActionLink("Edit", "Edit", new { id = Model.PostId }) |
     @Html.ActionLink("Delete", "Delete", new { id = Model.PostId }) |
-    @Html.ActionLink("Back to List", "Index")|
-    @Html.ActionLink("Create New", "Create", "Comment", new { idP = Model.PostId }, null)
-</p>
+    @Html.ActionLink("Back to News Feed", "Index")
 
+</b>
+<h1 style="margin-left:17%">Comments</h1>
 @if (Model.Comments != null)
 {
 <div style="width:70%;margin-left:15%">
@@ -79,28 +80,31 @@
     
     @foreach (var item in ViewBag.TotalComments)
     {
-        <div>
-            <p style="margin-left:10%">
-                <b>Written By:</b>
-                @item.UserId
+        <div style="margin-bottom:20px;margin-top:20px;width:66%;margin-left:17%;background-color:white;border: 1px solid;
+  padding: 20px;padding-bottom:20px;padding-left:60px;
+  box-shadow: 5px 10px 8px #888888;">
+            <p style="">
+                @{string pathhh = "~/Content/Uploads/user-profile.png";}
+                <img src="@Url.Content(pathhh)" width="50" height="50" />
+                <b>@item.UserId</b>
             </p>
-            <div style="border: 1px solid #ccc;width:80%;margin-left:10%">
+            <div style="border: 1px solid #ccc;width:80%;;height:100px">
                 
                 @item.Content
             </div>
 
-            <p>
-                @item.CommentDate
-            </p>
-            <p>
-                @item.NbrLikes persons liked this Comment
-            </p>
-            <td>
-
-                @Html.ActionLink("Edit Comment", "Edit", "Comment", new { id = item.CommentId, idP = Model.PostId }, null) |
-
+            <b>
+                Written on @item.CommentDate
+            </b>
+            
+            <b style="margin-left:100px">
+                <b>
+                    @Html.ActionLink("Edit Comment", "Edit", "Comment", new { id = item.CommentId, idP = Model.PostId }, null) |
+                </b>
+                <b>
                 @Html.ActionLink("Delete", "Delete", "Comment", new { id = item.CommentId, idP = Model.PostId }, null)
-            </td>
+            </b>
+            </b>
         </div>
 
     }

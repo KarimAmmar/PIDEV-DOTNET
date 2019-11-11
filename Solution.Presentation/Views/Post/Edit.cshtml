@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+
 
 
 @using (Html.BeginForm("Edit", "Post", FormMethod.Post,
@@ -12,8 +12,8 @@
 {
     @Html.AntiForgeryToken()
     
-<div class="form-horizontal">
-    <h4>Post</h4>
+<div class="form-horizontal" style="width:40%;margin-left:30%">
+    <h4>Edit Post</h4>
     <hr />
 
 
@@ -27,13 +27,13 @@
         </div>
     </div>
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.UrlImage)
-    </div>
-    <div class="editor-field">
-        Upload an Image
-        @Html.TextBox("file", "", new { type = "file" })
-        @Html.ValidationMessageFor(model => model.UrlImage)
+    <div class="form-group">
+        <b>Add Image</b>
+        <div class="editor-field" style="margin-left:150px">
+
+            @Html.TextBox("file", "", new { type = "file" })
+            @Html.ValidationMessageFor(model => model.UrlImage)
+        </div>
     </div>
 
     

@@ -45,7 +45,7 @@ namespace Solution.Presentation.Controllers
             {
                 CommentId=fvm.CommentId,
                 PostId = idP,
-                UserId = fvm.UserId,
+                UserId = 2,
                 Content = fvm.Content,
                 CommentDate= DateTime.Today,
             NbrLikes = 0
